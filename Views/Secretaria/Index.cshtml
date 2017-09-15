@@ -1,0 +1,24 @@
+@model SCA.Models.AlunoViewModel
+@using SCA.Models
+
+@{
+    ViewData["Title"] = "Módulo Secretaria";
+}
+<blockquote>
+  <p><h3>@ViewData["Title"]</h3></p>
+</blockquote>
+
+<form role="form">
+  <h3>Aluno</h3>
+  <div class="form-group">
+    <a asp-area="" asp-controller="Aluno" asp-action="Index">Cadastro</a>
+  </div>  
+  <h3>Curso</h3>
+  <div class="form-group">
+    <a asp-area="" asp-controller="Curso" asp-action="Index">Cadastro</a>
+  </div>  
+  <h3>Matrícula</h3>
+  <div class="form-group">
+    <a asp-area="" asp-controller="Matricula" asp-action="Index">Cadastro</a>
+  </div>
+</form>

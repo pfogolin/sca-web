@@ -1,0 +1,37 @@
+@model SCA.Models.CursoViewModel
+@using SCA.Models
+
+@{
+    ViewData["Title"] = "Cadastro de Cursos";
+}
+<blockquote>
+  <p><h3>@ViewData["Title"]</h3></p>
+</blockquote>
+
+<form asp-action="Create" role="form">
+  <div class="form-group">
+    <label for="lblNomeCurso">Nome do curso</label>
+    <input type="txtNomeCurso" class="form-control" id="lblNomeCurso" placeholder="Nome do curso" asp-for="NomeCurso">
+  </div>
+  <div class="form-group">
+    <label for="lblPeriodo">Período</label>
+    <input type="txtPeriodo" class="form-control" id="lblPeriodo" placeholder="Período" asp-for="Periodo">
+  </div>
+  <div class="form-group">
+    <label for="lblValorMatricula">Valor da matrícula</label>
+    <input type="txtValorMatricula" class="form-control" id="lblValorMatricula" placeholder="Valor da matrícula" asp-for="ValorMatricula">
+  </div>
+  <div class="form-group">
+    <label for="lblValorMensalidade">Valor da mensalidade</label>
+    <input type="txtValorMensalidade" class="form-control" id="lblValorMensalidade" placeholder="Valor da mensalidade" asp-for="ValorMensalidade">
+  </div>
+  <div class="form-group">
+    <label for="lblParcelas">Parcelas</label>
+    <input type="txtParcelas" class="form-control" id="lblParcelas" placeholder="Parcelas" asp-for="Parcelas">
+  </div>
+  <div class="form-group">
+    <label for="lblNomeCoordenador">Nome do coordenador</label>
+    <input type="txtNomeCoordenador" class="form-control" id="lblNomeCoordenador" placeholder="Nome do coordenador" asp-for="NomeCoordenador">
+  </div>
+  <button type="submit" class="btn btn-default">Gravar</button>
+</form>
