@@ -18,6 +18,14 @@ namespace SCA.Controllers
             return View();
         }
 
+        [HttpGet("/Aluno/BolsaEnem")]
+        public async Task<int> GetBolsaEnem(int idAluno)
+        {
+            AlunoRepository rep = new AlunoRepository();
+            int bolsa = await rep.GetBolsaEnem();
+            return bolsa;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AlunoViewModel aluno)

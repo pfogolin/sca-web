@@ -21,6 +21,17 @@ namespace SCA.Repositories
                 return JsonConvert.DeserializeObject<IList<AlunoViewModel>>(response);
             }
         }
+
+        public async Task<int> GetBolsaEnem()
+        {
+            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(60) })
+            {
+                string response = await httpClient.GetStringAsync(
+                    string.Format("{0}/bolsaEnem", "http://localhost:8084"));
+                return Convert.ToInt32(response);
+            }
+        }
+
         public async Task<string> SaveAluno(AlunoViewModel aluno)
         {
             using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(60) })

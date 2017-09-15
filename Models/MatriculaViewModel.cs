@@ -34,5 +34,6 @@ namespace SCA.Models
 
         public List<SelectListItem> Cursos { set; get; }
 
+        public int BolsaEnem {get;set;}
     }
 }

@@ -20,7 +20,7 @@ namespace SCA.Controllers
             var cursoRep = new CursoRepository();
 
             var alunos = await alunoRep.GetAluno();
-            var cursos = await cursoRep.GetCurso();
+            var cursos = await cursoRep.GetCurso();            
 
             ViewBag.AlunosList = alunos;
             ViewBag.CursosList = cursos;
