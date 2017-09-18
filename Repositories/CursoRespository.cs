@@ -17,7 +17,7 @@ public class CursoRepository
             using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(60) })
             {                
                 string response = await httpClient.GetStringAsync(
-                    string.Format("{0}/curso", "http://localhost:8082"));
+                    string.Format("{0}/curso", "http://controleacademico-env.bpea3squex.us-east-2.elasticbeanstalk.com"));
                 return JsonConvert.DeserializeObject<IList<CursoViewModel>>(response);
             }
         }
@@ -27,7 +27,7 @@ public class CursoRepository
             {  
                 string postData = JsonConvert.SerializeObject(curso);
                 var postContent = new StringContent(postData, Encoding.UTF8, "application/json");
-                var post = await httpClient.PostAsync(string.Format("{0}/curso/gravar", "http://localhost:8082"), postContent);
+                var post = await httpClient.PostAsync(string.Format("{0}/curso/gravar", "http://controleacademico-env.bpea3squex.us-east-2.elasticbeanstalk.com"), postContent);
                 
                 return await post.Content.ReadAsStringAsync();
             }  

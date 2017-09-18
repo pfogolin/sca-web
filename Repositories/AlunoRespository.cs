@@ -17,7 +17,7 @@ namespace SCA.Repositories
             using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(60) })
             {
                 string response = await httpClient.GetStringAsync(
-                    string.Format("{0}/aluno", "http://localhost:8084"));
+                    string.Format("{0}/aluno", "http://controleacademico-env.bpea3squex.us-east-2.elasticbeanstalk.com"));
                 return JsonConvert.DeserializeObject<IList<AlunoViewModel>>(response);
             }
         }
@@ -27,7 +27,7 @@ namespace SCA.Repositories
             using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(60) })
             {
                 string response = await httpClient.GetStringAsync(
-                    string.Format("{0}/bolsaEnem", "http://localhost:8084"));
+                    string.Format("{0}/bolsaEnem", "http://controleacademico-env.bpea3squex.us-east-2.elasticbeanstalk.com"));
                 return Convert.ToInt32(response);
             }
         }
@@ -38,7 +38,7 @@ namespace SCA.Repositories
             {
                 string postData = JsonConvert.SerializeObject(aluno);
                 var postContent = new StringContent(postData, Encoding.UTF8, "application/json");
-                var post = await httpClient.PostAsync(string.Format("{0}/aluno/gravar", "http://localhost:8084"), postContent);
+                var post = await httpClient.PostAsync(string.Format("{0}/aluno/gravar", "http://controleacademico-env.bpea3squex.us-east-2.elasticbeanstalk.com"), postContent);
 
                 return await post.Content.ReadAsStringAsync();
             }

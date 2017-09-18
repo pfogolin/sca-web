@@ -17,7 +17,7 @@ public class MatriculaRepository
             using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(60) })
             {                
                 string response = await httpClient.GetStringAsync(
-                    string.Format("{0}/matricula", "http://localhost:8083"));
+                    string.Format("{0}/matricula", "http://controleacademico-env.bpea3squex.us-east-2.elasticbeanstalk.com"));
                 return JsonConvert.DeserializeObject<IList<MatriculaViewModel>>(response);
             }
         }
@@ -27,7 +27,7 @@ public class MatriculaRepository
             {  
                 string postData = JsonConvert.SerializeObject(matricula);
                 var postContent = new StringContent(postData, Encoding.UTF8, "application/json");
-                var post = await httpClient.PostAsync(string.Format("{0}/matricula/gravar", "http://localhost:8083"), postContent);
+                var post = await httpClient.PostAsync(string.Format("{0}/matricula/gravar", "http://controleacademico-env.bpea3squex.us-east-2.elasticbeanstalk.com"), postContent);
                 
                 return await post.Content.ReadAsStringAsync();
             }  

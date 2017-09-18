@@ -12,8 +12,8 @@
 <form asp-action="Create" role="form">
   <div class="form-group">
     <label for="lblAluno">Aluno</label>
-    <select asp-for="AlunoId" asp-items="@Model.Alunos" onchange='GetBolsaEnem(1)'>
-      <option>Por favor, selecione um Aluno</option>
+    <select asp-for="AlunoId" asp-items="@Model.Alunos" onchange="getBolsaEnem(this.value)">
+      <option value="0">Por favor, selecione um Aluno</option>
     </select>
 
   </div>
@@ -32,29 +32,32 @@
     <input type="txtDataFim" class="form-control" id="lblDataFim" placeholder="Data fim" asp-for="DataFim">
   </div>
   <div class="form-group">
-    <label for="lblBolsa">Bolsa de estudos</label>
-    <input type="txtBolsa" class="form-control" id="lblBolsa" placeholder="Bolsa de estudos" value="@Model.BolsaEnem" asp-for="BolsaEstudos">
+    <label for="lblBolsa">Bolsa de estudos (ENEM)</label>
+    <input type="txtBolsa" class="form-control" id="txtBolsa" placeholder="Bolsa de estudos" value="@Model.BolsaEnem" asp-for="BolsaEstudos">
   </div>
   <button type="submit" class="btn btn-default">Gravar</button>
 </form>
 
 <script>
-  function GetBolsaEnem(idAluno) {
-      var success = function() {
-          $.ajax({
-              url: '/Aluno/BolsaEnem',
-              data: {
-                  idAluno: idAluno
-              },
-              success: function(data) {
-                  var bolsaEstudos = $('#lblBolsa');
-                  bolsaEstudos.value = data;
-              },
-              error: function(data, status, httpcode) {
-                  if (httpcode == 'Bad Request') alert(data.responseText);
-                  else alert('Não foi possível gerar o seu acordo, tente novamente mais tarde.');
-              }
-          });
-      };
+  function getBolsaEnem(idAluno) {
+    if (idAluno > 0) {
+      $.ajax({
+          url: '/Aluno/BolsaEnem',
+          data: {
+              idAluno: idAluno
+          },
+          success: function(data) {
+              var bolsaEstudos = $('#txtBolsa');
+              bolsaEstudos.val(data);
+          },
+          error: function(data, status, httpcode) {
+              if (httpcode == 'Bad Request') alert(data.responseText);
+              else alert('Não foi possível gerar o seu acordo, tente novamente mais tarde.');
+          }
+      });
+    } else {
+        var bolsaEstudos = $('#txtBolsa');
+        bolsaEstudos.val("0");
     }
+  };
   </script>
