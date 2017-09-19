@@ -9,7 +9,7 @@ using SCA.Repositories;
 
 namespace SCA.Controllers
 {
-    public class AlunoController : Controller
+    public class AlunosController : Controller
     {
         [Authorize]
         public IActionResult Index()
@@ -18,17 +18,9 @@ namespace SCA.Controllers
             return View();
         }
 
-        [HttpGet("/Aluno/BolsaEnem")]
-        public async Task<int> GetBolsaEnem(int idAluno)
-        {
-            AlunoRepository rep = new AlunoRepository();
-            int bolsa = await rep.GetBolsaEnem();
-            return bolsa;
-        }
-
-        [HttpPost]
+        [HttpPost("/Alunos/Save")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AlunoViewModel aluno)
+        public async Task<IActionResult> Save(AlunoViewModel aluno)
         {
             try
             {
@@ -41,12 +33,19 @@ namespace SCA.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
-                // ModelState.AddModelError("", "Unable to save changes. " +
-                //     "Try again, and if the problem persists " +
-                //     "see your system administrator.");
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
             }
             return View(aluno);
+        }
+
+        [HttpGet("/Alunos/BolsaEnem")]
+        public async Task<int> GetBolsaEnem(int idAluno)
+        {
+            AlunoRepository rep = new AlunoRepository();
+            int bolsa = await rep.GetBolsaEnem();
+            return bolsa;
         }
 
         public IActionResult Error()
