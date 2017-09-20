@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SCA.Models;
 using SCA.Repositories;
+using Newtonsoft.Json;
 
 namespace SCA.Controllers
 {
@@ -31,20 +32,20 @@ namespace SCA.Controllers
         public async Task<IActionResult> Create(AlunoViewModel aluno)
         {
             try
-            {
+            {                
                 if (ModelState.IsValid)
                 {
                     AlunoRepository rep = new AlunoRepository();
                     var alunos = await rep.SaveAluno(aluno);
                     return RedirectToAction("Index");
+                    //return Content(JsonConvert.SerializeObject(aluno) + JsonConvert.SerializeObject(ModelState.Values));
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
-                // ModelState.AddModelError("", "Unable to save changes. " +
-                //     "Try again, and if the problem persists " +
-                //     "see your system administrator.");
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
             }
             return View(aluno);
         }
